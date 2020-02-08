@@ -152,7 +152,7 @@
 			left join tb_user b on a.id_user = b.id_user
 			left join schedule c on c.id_schedule = a.id_schedule
 			left join m_jabatan d on b.id_jabatan = d.id_jabatan
-			where b.deleted !='1' and a.status_konfirmasi = 'Bisa Hadir' and a.id_schedule='$id_schedule'")->result_array();
+			where b.deleted !='1' and a.status_konfirmasi = 'Terdaftar' and a.id_schedule='$id_schedule'")->result_array();
 			return $query;
 		}
 
