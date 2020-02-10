@@ -184,7 +184,7 @@
          <form action="<?php echo base_url('hadir_meeting');?>" method="post">
             <input type="hidden" name="id_user" value="<?php  echo $data['id_user'];?>">
             <input type="hidden" name="id_schedule" value="<?php  echo $data['id_schedule'];?>">
-            <input type="hidden" name="status_konfirmasi" value="Tidak Bisa Hadir">
+            <input type="hidden" name="status_konfirmasi" value="Tidak Hadir">
           <p>Terima kasih atas konfirmasi yang ada pilih 
             selanjutnya silahkan tekan tombol saya Tidak Hadir</p>
         </div>

@@ -106,7 +106,7 @@
             <!--   <li class="active"><a href="#adddMember" data-toggle="tab">Add Member</a></li> -->
               <li class="active"><a href="#memberList" data-toggle="tab">Member Registered</a></li>
               <li><a href="#Confirmation" data-toggle="tab">Confirmation Present</a></li>
-              <li><a href="#notpresent" data-toggle="tab">Member Not Present</a></li>
+              <li><a href="#notpresent" data-toggle="tab">Confirmation Not Present</a></li>
               <li><a href="#memberPresence" data-toggle="tab">Member Present</a></li>
               <li><a href="#meetingResult" data-toggle="tab">Meeting Result</a></li>
             </ul>

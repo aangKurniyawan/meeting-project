@@ -258,9 +258,10 @@
 		}
 
 		public function dataTidakHadir(){
-			$query = $this->db->query("select a.*,b.*,c.* from absent a
+			$query = $this->db->query("select a.*,b.*,c.*,d.* from absent a
 			left join schedule b on a.id_schedule = b.id_schedule
 			left join tb_user c on a.id_user = c.id_user
+			left join m_room d on b.id_room = d.id_room
 			where a.status_konfirmasi='Tidak Hadir' and c.level='Dosen'")->result_array();
 			return $query;
 		}
@@ -282,14 +283,11 @@
 
 		public function persentase($id_schedule){
 			$query = $this->db->query("SELECT id_schedule,
+			count(id_user) as Total,
 			sum(case when status_konfirmasi='Terdaftar' then 1 else 0 end) as Terdaftar,
 			sum(case when status_konfirmasi='Bisa Hadir' then 1 else 0 end) as Konfirmasi_Hadir,
 			sum(case when status_konfirmasi='Hadir' then 1 else 0 end) as Hadir,
-			sum(case when status_konfirmasi='Tidak Hadir' then 1 else 0 end) as Tidak_Hadir,
-			sum(case when status_konfirmasi='Terdaftar' then 1 when
-			status_konfirmasi='Bisa Hadir' then 1 when
-			status_konfirmasi='Tidak Hadir' then 1 when
-			status_konfirmasi='Hadir' then 1 else 0 end) as Total
+			sum(case when status_konfirmasi='Tidak Hadir' then 1 else 0 end) as Tidak_Hadir
 			FROM absent
 			where id_schedule='$id_schedule'
 			group by id_schedule");

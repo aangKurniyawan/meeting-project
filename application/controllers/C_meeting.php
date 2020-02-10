@@ -326,7 +326,7 @@
 			$data['memberAtendance'] = $this->M_admin->list_member_hadir($id_schedule);
 			$data['detailScedule']  = $this->M_admin->detailScedule($where);
 			$data['member'] 		= $this->M_admin->listMember();
-			$data['persentase'] 	 = $this->M_admin->persentase($id_schedule);
+			$data['persentase'] 	= $this->M_admin->persentase($id_schedule);
 			$this->load->view('admin/detail_schedule',$data);
 		}
 

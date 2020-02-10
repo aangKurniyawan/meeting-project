@@ -80,7 +80,7 @@
           Persentase : <?php 
             $total = $rows['Total'];
             if($total == 0){
-              $total = 1;
+              $total = 0;
             }else{
               $total = $rows['Total'];
             }
