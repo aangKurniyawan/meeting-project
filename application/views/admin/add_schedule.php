@@ -169,6 +169,99 @@
     </section>
     <!-- /.content -->
   </div>
+  <?php  foreach($schedule as $data){ ?>
+    <div class="modal modal-danger fade" id="modal-delete<?php echo $data['id_schedule'];?>">
+      <form action="<?php echo base_url('delete_schdeule');?>" method="post">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Peringatan !!</h4>
+          </div>
+          <div class="modal-body">
+            <p>Data Yang Sudah Dihapus Tidak Bisa Dilihat Kembali</p>
+            <div class="form-group">
+              <input type="hidden" name="id_schedule" value="<?php echo $data['id_schedule'];?>" required class="form-control" >
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Hapus Data</button>
+          </div>
+        </div>
+      </div>
+    </form>
+    </div>
+  <?php }?>
+
+  <?php foreach($schedule as $data){ ?>
+  <div class="modal modal-danger fade" id="modal-edit<?php echo $data['id_schedule'];?>">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Edit Schedule</h4>
+        </div>
+        <div class="modal-body">
+          <form action="<?php echo base_url('schedule_edit');?>" method="post">
+            <input type="hidden" name="id_schedule" value="<?php echo $data['id_schedule'];?>">
+            <div class="box-body">
+              <div class="form-group">
+                <div class="input-group date">
+                  <div class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                  </div>
+                    <input type="text" name="tanggal" value="<?php echo $data['tanggal'];?>" class="form-control pull-right" id="datepicker" placeholder="Date" >
+                  </div>
+                </div>
+                <div class="form-group">
+                  <input type="text" name="requestor" value="<?php echo $data['requestor'];?>" class="form-control" id="exampleInputPassword1" placeholder="Meeting Requestor">
+                </div>
+                <div class="form-group">
+                  <input type="text" name="tittle_meeting" value="<?php echo $data['tittle_meeting'];?>" class="form-control" id="exampleInputPassword1" placeholder="Tittle Of Meeting">
+                </div>
+                <div class="form-group">
+                  <select name="id_room" class="form-control" required>
+                    <option value="<?php echo $data['id_room'];?>"><?php  echo $data['nama_ruangan'];?></option>
+                    <?php foreach($room as $row){ ?>
+                      <option value="<?php  echo $row['id_room'];?>"><?php  echo $row['nama_ruangan'];?></option>
+                    <?php } ?>
+                  </select>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <label>Starting Hour</label>
+                  <div class="form-group">
+                    <input type="time" name="starting_hour" value="<?php echo $data['starting_hour'];?>"class="form-control" id="exampleInputPassword1" >
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <label>Ending Hour</label>
+                  <div class="form-group">
+                    <input type="time" name="ending_hour" value="<?php echo $data['ending_hour'];?>" class="form-control" id="exampleInputPassword1">
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <select name="status" class="form-control">
+                  <option value="Aktif" <?php if ($data['status'] == 'Aktif')  echo 'selected'; else echo '';?>>Aktif</option>
+                  <option value="Batal" <?php if ($data['status'] == 'Batal')  echo 'selected'; else echo '';?>>Batal</option>
+                  <option value="Selesai" <?php if ($data['status'] == 'Selesai')  echo 'selected'; else echo '';?>>Selesai</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-outline">Save changes</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+<?php }?>
   <!-- /.content-wrapper -->
 <footer class="main-footer">
     <div class="pull-right hidden-xs">
@@ -177,161 +270,63 @@
   </footer>
 </div>
  <div class="modal fade" id="modal-default">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Add Schedule</h4>
-                </div>
-                  <div class="modal-body">
-                    <form action="<?php echo base_url('schedule_add');?>" method="post">
-                       <div class="box-body">
-                    <div class="form-group">
-                      <div class="input-group date">
-                        <div class="input-group-addon">
-                          <i class="fa fa-calendar"></i>
-                        </div>
-                        <input type="text" name="tanggal" class="form-control pull-right" id="datepicker" placeholder="contoh : 01/01/2020">
-                      </div>
+    <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Add Schedule</h4>
+          </div>
+          <div class="modal-body">
+            <form action="<?php echo base_url('schedule_add');?>" method="post">
+              <div class="box-body">
+                <div class="form-group">
+                  <div class="input-group date">
+                    <div class="input-group-addon">
+                      <i class="fa fa-calendar"></i>
                     </div>
-                      <div class="form-group">
-                        <input type="text" name="requestor" class="form-control" id="exampleInputPassword1" placeholder="Meeting Requestor">
-                      </div>
-                      <div class="form-group">
-                        <input type="text" name="tittle_meeting" class="form-control" id="exampleInputPassword1" placeholder="Tittle Of Meeting">
-                      </div>
-                      <div class="form-group">
-                        <select name="id_room" class="form-control" required>
-                          <option>-Option Room-</option>
-                          <?php foreach($room as $row){ ?>
-                          <option value="<?php  echo $row['id_room'];?>"><?php  echo $row['nama_ruangan'];?></option>
-                          <?php } ?>
-                        </select>
-                      </div>
-                      <div class="row">
-                          <div class="col-md-6">
-                            <label>Starting Hour</label>
-                            <div class="form-group">
-                            <input type="time" name="starting_hour" class="form-control" id="exampleInputPassword1" >
-                            </div>
-                          </div>
-                           <div class="col-md-6">
-                            <label>Ending Hour</label>
-                            <div class="form-group">
-                            <input type="time" name="ending_hour" class="form-control" id="exampleInputPassword1">
-                            </div>
-                          </div>
-                      </div>
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-                      <button type="submit" class="btn btn-primary">Simpan Schedule</button>
-                    </div>
-                    </form>
+                    <input type="text" name="tanggal" class="form-control pull-right" id="datepicker" placeholder="contoh : 01/01/2020">
                   </div>
                 </div>
-              </div>
-  <?php 
-          foreach($schedule as $data){
-        ?>
-        <div class="modal modal-danger fade" id="modal-delete<?php echo $data['id_schedule'];?>">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span></button>
-                  <h4 class="modal-title">Peringatan !!</h4>
-                </div>
-                <div class="modal-body">
-                  <p>Data Yang Sudah Dihapus Tidak Bisa Dilihat Kembali</p>
-                  <form action="<?php echo base_url('delete_schdeule');?>" method="post">
+                  <div class="form-group">
+                    <input type="text" name="requestor" class="form-control" id="exampleInputPassword1" placeholder="Meeting Requestor">
+                  </div>
+                  <div class="form-group">
+                    <input type="text" name="tittle_meeting" class="form-control" id="exampleInputPassword1" placeholder="Tittle Of Meeting">
+                  </div>
                     <div class="form-group">
-                      </div>
-                         <input type="hidden" name="id_schedule" value="<?php echo $data['id_schedule'];?>" required class="form-control" >
-                      </div>
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-                      <button type="submit" class="btn btn-primary">Hapus Data</button>
-                    </div>
-                  </form>
-                </div>
-              </div>
-            </div>
-          <?php }?>
-<?php 
-          foreach($schedule as $data){
-        ?>
-        <div class="modal modal-danger fade" id="modal-edit<?php echo $data['id_schedule'];?>">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Edit Schedule</h4>
-              </div>
-              <div class="modal-body">
-                <form action="<?php echo base_url('schedule_edit');?>" method="post">
-                  <input type="hidden" name="id_schedule" value="<?php echo $data['id_schedule'];?>">
-                 <div class="box-body">
-                    <div class="form-group">
-                      <div class="input-group date">
-                        <div class="input-group-addon">
-                          <i class="fa fa-calendar"></i>
-                        </div>
-                        <input type="text" name="tanggal" value="<?php echo $data['tanggal'];?>" class="form-control pull-right" id="datepicker" placeholder="Date" >
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <input type="text" name="requestor" value="<?php echo $data['requestor'];?>" class="form-control" id="exampleInputPassword1" placeholder="Meeting Requestor">
-                    </div>
-                    <div class="form-group">
-                      <input type="text" name="tittle_meeting" value="<?php echo $data['tittle_meeting'];?>" class="form-control" id="exampleInputPassword1" placeholder="Tittle Of Meeting">
-                    </div>
-                    <div class="form-group">
-                     <select name="id_room" class="form-control" required>
-                        <option value="<?php echo $data['id_room'];?>"><?php  echo $data['nama_ruangan'];?></option>
-                          <?php foreach($room as $row){ ?>
-                          <option value="<?php  echo $row['id_room'];?>"><?php  echo $row['nama_ruangan'];?></option>
-                          <?php } ?>
+                      <select name="id_room" class="form-control" required>
+                        <option>-Option Room-</option>
+                        <?php foreach($room as $row){ ?>
+                        <option value="<?php  echo $row['id_room'];?>"><?php  echo $row['nama_ruangan'];?></option>
+                        <?php } ?>
                       </select>
                     </div>
                     <div class="row">
-                      <div class="col-md-6">
-                        <label>Starting Hour</label>
-                        <div class="form-group">
-                          <input type="time" name="starting_hour" value="<?php echo $data['starting_hour'];?>"class="form-control" id="exampleInputPassword1" >
-                        </div>
-                          </div>
-                           <div class="col-md-6">
-                            <label>Ending Hour</label>
-                            <div class="form-group">
-                            <input type="time" name="ending_hour" value="<?php echo $data['ending_hour'];?>" class="form-control" id="exampleInputPassword1">
-                            </div>
-                          </div>
-                      </div>
-                       <div class="form-group">
-                      <select name="status" class="form-control">
-                        <option value="Aktif" <?php if ($data['status'] == 'Aktif')  echo 'selected'; else echo '';?>>Aktif</option>
-                        <option value="Batal" <?php if ($data['status'] == 'Batal')  echo 'selected'; else echo '';?>>Batal</option>
-                        <option value="Selesai" <?php if ($data['status'] == 'Selesai')  echo 'selected'; else echo '';?>>Selesai</option>
-                      </select>
+                    <div class="col-md-6">
+                      <label>Starting Hour</label>
+                    <div class="form-group">
+                      <input type="time" name="starting_hour" class="form-control" id="exampleInputPassword1" >
                     </div>
-                    </div>
-                   
+                  </div>
+                  <div class="col-md-6">
+                    <label>Ending Hour</label>
+                  <div class="form-group">
+                    <input type="time" name="ending_hour" class="form-control" id="exampleInputPassword1">
+                  </div>
+                </div>
               </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-outline">Save changes</button>
-              </div>
-              </form>
             </div>
-            <!-- /.modal-content -->
-          </div>
-          <!-- /.modal-dialog -->
-        </div>
-      <?php }?>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Simpan Schedule</button>
+            </div>
+          </form>
+      </div>
+    </div>
+  </div>
+
+
        
 
      
