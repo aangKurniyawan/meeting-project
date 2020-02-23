@@ -336,6 +336,10 @@
 			$id_schedule = $this->input->post("id_schedule");
 			$id_user 	 = $this->input->post("id_user");
 			$mailTo 	 = $this->input->post("email");
+			$tanggal 	 = $this->input->post("tanggal");
+			$nama_ruangan = $this->input->post("nama_ruangan");
+			$starting_hour = $this->input->post("starting_hour");
+			$ending_hour = $this->input->post("ending_hour");
 			$tittle_meeting = $this->input->post("tittle_meeting");
 			$link = "http://localhost/project-meeting/";
 			
@@ -353,11 +357,18 @@
 			   $this->email->from('aangmkom2017@gmail.com', 'Admin Re:Undangan Meeting');   
 			   $this->email->to($mailTo);   
 			   $this->email->subject('Undangan Konfirmasi Kehadiran Meeting : ' . $tittle_meeting);   
-			   $this->email->message("Silahkan klik link dibawah ini untuk masuk ke sistem
+			   $this->email->message("Detail Undangan Meeting : <br>
+			   	Tema Meeting :".$tittle_meeting."<br>
+			   	Tanggal Meeting :".$tanggal."<br>
+			   	Tempat Meeting :".$nama_ruangan."<br>
+			   	Mulai Meeting :".$starting_hour." .WIB <br>
+			   	selesai Meeting :".$ending_hour." .WIB<br>
+			   	Untuk konfirmasi kehadiran 
+			   	Silahkan klik link dibawah ini untuk masuk ke sistem
 			    dan silahkan login sesuai dengan username yang anda miliki 
 			    ".$link);  
 			   if (!$this->email->send()) {  
-			    $this->session->set_flashdata('emailGagal','Pesan Email Gagal Terkirim Email Tidak Terdaftar');    
+			    $this->session->set_flashdata('emailGagal','Pesan Email Gagal Terkirim, Email Tidak Terdaftar');    
 			   }else{  
 			    $this->session->set_flashdata('emailBerhasil','Pesan Email Sudah Terkirim');   
 			   }  

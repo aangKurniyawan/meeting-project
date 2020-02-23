@@ -195,6 +195,10 @@
                                   <input type="hidden" id="tittle_meeting" name="tittle_meeting" value="<?php echo $data['tittle_meeting'];?>">
                                   <input type="hidden" id="id_schdule" name="id_schedule" value="<?php echo $data['id_schedule'];?>">
                                   <input type="hidden" id="id_user" name="id_user" value="<?php echo $row['id_user'];?>">
+                                  <input type="hidden" id="tanggal" name="tanggal" value="<?php echo $data['tanggal'];?>">
+                                  <input type="hidden" id="nama_ruangan" name="nama_ruangan" value="<?php echo $data['nama_ruangan'];?>">
+                                  <input type="hidden" id="starting_hour" name="starting_hour" value="<?php echo $data['starting_hour'];?>">
+                                  <input type="hidden" id="ending_hour" name="ending_hour" value="<?php echo $data['ending_hour'];?>">
                                   <button type="submit" id="btn_simpan" <?php $status=$data['status']; if($status !='Aktif'){ echo"class='btn btn-primary hidden'"; }else{echo"class='btn btn-primary'";}?>>
                                     Add To Meeting
                                   </button>
